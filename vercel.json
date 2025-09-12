@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/binance",
+      "dest": "/api/binance.js"
+    }
+  ]
+}
