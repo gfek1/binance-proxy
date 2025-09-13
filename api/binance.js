@@ -1,5 +1,3 @@
-// api/binance.js
-
 export default async function handler(req, res) {
   const { path = '', ...query } = req.query;
 
@@ -13,7 +11,14 @@ export default async function handler(req, res) {
   });
 
   try {
-    const binanceRes = await fetch(url.toString());
+    const binanceRes = await fetch(url.toString(), {
+      headers: {
+        'User-Agent': 'Mozilla/5.0',
+        'Accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.9'
+      }
+    });
+
     const data = await binanceRes.json();
     res.status(binanceRes.status).json(data);
   } catch (err) {
