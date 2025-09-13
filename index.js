@@ -9,7 +9,16 @@ app.get("/binance", async (req, res) => {
   const { path = "", ...query } = req.query;
   if (!path) return res.status(400).json({ error: "Missing 'path' query parameter." });
 
-  const url = new URL(`https://api.binance.com/${path}`);
+  // Determine which Binance domain to use based on the path prefix
+  let baseURL = "https://api.binance.com"; // default: spot market
+
+  if (path.startsWith("fapi/")) {
+    baseURL = "https://fapi.binance.com"; // USDT-M Futures
+  } else if (path.startsWith("dapi/")) {
+    baseURL = "https://dapi.binance.com"; // COIN-M Futures
+  }
+
+  const url = new URL(`${baseURL}/${path}`);
   Object.entries(query).forEach(([key, value]) => url.searchParams.set(key, value));
 
   try {
