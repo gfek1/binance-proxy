@@ -39,7 +39,7 @@ app.get("/mexc", async (req, res) => {
   if (!path) return res.status(400).json({ error: "Missing 'path' query parameter." });
 
   let baseURL = "https://api.mexc.com"; // Spot
-  if (path.startsWith("contract/")) baseURL = "https://contract.mexc.com"; // Futures
+  if (path.includes("contract/")) baseURL = "https://contract.mexc.com"; // Futures
 
   const url = new URL(`${baseURL}/${path}`);
   Object.entries(query).forEach(([key, value]) => url.searchParams.set(key, value));
