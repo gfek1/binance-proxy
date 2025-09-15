@@ -1,5 +1,5 @@
 {
-  "name": "binance-proxy",
+  "name": "crypto-proxy-api",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
